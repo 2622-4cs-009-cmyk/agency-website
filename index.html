@@ -281,22 +281,32 @@ src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=c
       </div>
     </section>
 
-    <section class="contact-section section" id="contact">
-      <div class="contact-box">
-        <span class="section-tag">HAVE A PROJECT IN MIND?</span>
-        <h2>Let's Create Something <span class="gradient-text">Amazing.</span></h2>
-        <p>
-          Have a website idea or need a fresh brand identity?
-          Tell us what you're imagining and let's start a conversation.
-        </p>
-        <a
-          class="btn btn-primary"
-          href="mailto:hello@arafkhandigitalstudio.com?subject=Project%20Inquiry">
-          Start a Conversation <span>↗</span>
-        </a>
-        <span class="contact-decoration">✳</span>
-      </div>
-    </section>
+    
+<section class="contact-section section" id="contact">
+  <div class="contact-box">
+    <span class="section-tag">HAVE A PROJECT IN MIND?</span>
+    <h2>Let's Create Something <span class="gradient-text">Amazing.</span></h2>
+    <p>Tell us about your project and let's start a conversation.</p>
+
+    <form id="contactForm" novalidate>
+      <label for="name">Full Name</label>
+      <input id="name" type="text">
+      <p id="nameError" class="error"></p>
+
+      <label for="email">Email</label>
+      <input id="email" type="text">
+      <p id="emailError" class="error"></p>
+
+      <label for="message">Message</label>
+      <textarea id="message" maxlength="200"></textarea>
+      <p id="messageError" class="error"></p>
+      <p id="counter">0 / 200</p>
+
+      <button class="btn btn-primary" type="submit">Send Message</button>
+      <p id="result" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
 
   </main>
 
