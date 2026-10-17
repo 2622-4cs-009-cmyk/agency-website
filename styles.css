@@ -679,3 +679,70 @@ footer p {
   overflow: hidden;
   border-radius: 18px;
 }
+
+
+/* SMART CONTACT FORM - TASK STYLING */
+
+#contactForm {
+  width: 100%;
+}
+
+#contactForm label {
+  display: block;
+  margin-bottom: 6px;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+#contactForm input,
+#contactForm textarea {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 6px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #0a1128;
+  color: #ffffff;
+  font: inherit;
+}
+
+#contactForm input:focus,
+#contactForm textarea:focus {
+  outline: 2px solid var(--purple);
+  border-color: var(--purple);
+}
+
+#nameError,
+#emailError,
+#messageError {
+  display: block;
+  color: #ff7777;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+#counter {
+  display: block;
+  text-align: right;
+  color: var(--muted);
+  font-size: 14px;
+  margin: 4px 0 16px;
+}
+
+#result {
+  margin-top: 16px;
+  color: #72f0a3;
+  font-weight: 700;
+}
+
+#contactForm button {
+  margin-top: 10px;
+  max-width: 100%;
+}
+
+@media (max-width: 600px) {
+  #contactForm input,
+  #contactForm textarea {
+    font-size: 16px;
+  }
+}
