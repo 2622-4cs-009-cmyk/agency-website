@@ -51,65 +51,79 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // 3. CONTACT FORM VALIDATION
-const contactForm = document.querySelector("#contactForm");
+        // 3. CONTACT FORM VALIDATION
+    const contactForm = document.querySelector("#contactForm");
 
-if (contactForm) {
-  const nameField = document.querySelector("#name");
-  const emailField = document.querySelector("#email");
-  const messageField = document.querySelector("#message");
+    if (contactForm) {
+        const nameField = document.querySelector("#name");
+        const emailField = document.querySelector("#email");
+        const messageField = document.querySelector("#message");
 
-  const nameError = document.querySelector("#nameError");
-  const emailError = document.querySelector("#emailError");
-  const messageError = document.querySelector("#messageError");
+        const nameError = document.querySelector("#nameError");
+        const emailError = document.querySelector("#emailError");
+        const messageError = document.querySelector("#messageError");
 
-  const counter = document.querySelector("#counter");
-  const result = document.querySelector("#result");
+        const counter = document.querySelector("#counter");
+        const result = document.querySelector("#result");
 
-  // Count message characters
-  if (messageField && counter) {
-    messageField.addEventListener("input", function () {
-      counter.textContent = messageField.value.length;
-    });
-  }
+        function updateCounter() {
+            if (messageField && counter) {
+                counter.textContent = messageField.value.length + " / 200";
+            }
+        }
 
-  // Validate the form
-  contactForm.addEventListener("submit", function (event) {
-    event.preventDefault();
+        if (messageField) {
+            messageField.addEventListener("input", updateCounter);
+            updateCounter();
+        }
 
-    let isValid = true;
+        contactForm.addEventListener("submit", function (event) {
+            event.preventDefault();
 
-    if (nameError) nameError.textContent = "";
-    if (emailError) emailError.textContent = "";
-    if (messageError) messageError.textContent = "";
-    if (result) result.textContent = "";
+            let isValid = true;
 
-    if (!nameField || nameField.value.trim() === "") {
-      if (nameError) nameError.textContent = "Please enter your name.";
-      isValid = false;
+            [nameError, emailError, messageError].forEach(function (element) {
+                if (element) {
+                    element.textContent = "";
+                    element.classList.remove("error");
+                }
+            });
+
+            if (result) {
+                result.textContent = "";
+                result.classList.remove("error", "success");
+            }
+
+            function showError(element, message) {
+                if (element) {
+                    element.textContent = message;
+                    element.classList.add("error");
+                }
+                isValid = false;
+            }
+
+            const name = nameField ? nameField.value.trim() : "";
+            const email = emailField ? emailField.value.trim() : "";
+            const message = messageField ? messageField.value.trim() : "";
+
+            if (name.length < 3) {
+                showError(nameError, "Name must be at least 3 characters.");
+            }
+
+            if (!email.includes("@") || !email.includes(".")) {
+                showError(emailError, "Please enter a valid email.");
+            }
+
+            if (message.length < 10) {
+                showError(messageError, "Message must be at least 10 characters.");
+            }
+
+            if (isValid && result) {
+                result.textContent = "Thank you, " + name + "! Your message is ready.";
+                result.classList.add("success");
+            }
+        });
     }
-
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailField || !emailPattern.test(emailField.value.trim())) {
-      if (emailError) emailError.textContent = "Please enter a valid email.";
-      isValid = false;
-    }
-
-    if (!messageField || messageField.value.trim() === "") {
-      if (messageError) messageError.textContent = "Please enter a message.";
-      isValid = false;
-    }
-
-    if (isValid && result) {
-      result.textContent =
-        "Thank you, " + nameField.value.trim() + "! Your form is ready.";
-      contactForm.reset();
-
-      if (counter) counter.textContent = "0";
-    }
-  });
-}
     
 
     // 4. BUTTON CLICK FEEDBACK
